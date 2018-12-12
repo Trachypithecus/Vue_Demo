@@ -1,6 +1,7 @@
 <template>
   <div class="product-list-page page">
-    <div class="total-text">搜索到了{{ total }}款产品</div>
+    <div class="total-text">搜索到了{{ total }}款商品</div>
+    <div v-if="showLoading" class="total-text">加载中...</div>
     <div class="item-list">
       <div v-for="item in items" class="item" :key="item.id">
         <img :src="item.thumbnail_pic">
@@ -21,7 +22,9 @@ export default {
     };
   },
   created() {
+    this.showLoading = true;
     list_product().then(res => {
+      this.showLoading = false;
       console.log(res, res.result.count);
       this.total = res.result.count;
       this.items = res.result.list;
