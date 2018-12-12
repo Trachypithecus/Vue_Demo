@@ -7,19 +7,31 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes: [
-    {
-      path: '/passport/:action',
+  routes: [{
+      path: '/passport',
       name: 'passport',
       component: passport
     },
-    // {
-    //   path: '/about',
-    //   name: 'about',
-    //   // route level code-splitting
-    //   // this generates a separate chunk (about.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    // }
+    {
+      path: '/product/list',
+      name: 'productList',
+      beforeEnter: (to, from, next) => {
+        console.log('to:', to);
+        console.log('from:', from);
+        let token = localStorage.getItem("token");
+        if (token) {
+          next();
+        } else {
+          alert("请先登录！")
+          next({
+            name: 'passport',
+            query: {
+              action: 'sign_in'
+            }
+          });
+        }
+      },
+      component: () => import('./views/ProductList.vue'),
+    }
   ]
 })
