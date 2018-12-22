@@ -3,10 +3,11 @@
         <div class="form-item">
             <div class="label">转出账号</div>
             <select
+                id="test"
                 class="selector input"
                 placeholder="请选择转出账号"
                 v-model="accountNoSequence"
-                @change="selectAccountNo($event)"
+                @change="selectAccountNo"
             >
                 <option
                     v-for="item in Accounts"
@@ -187,10 +188,11 @@ export default {
                 e.target.value.match(/^\d*(\.?\d{0,1})/g)[0] || null;
         },
         //获取转出账号
-        selectAccountNo(event) {
-            var accountNo = event.target.value;
-            this.accountNo = accountNo;
-            console.log("银行卡账户：", accountNo);
+        selectAccountNo() {
+            var myselect=document.getElementById("test");
+            var index=myselect.selectedIndex ;              // selectedIndex代表的是你所选中项的index
+            this.accountNo = myselect.options[index].text;
+            console.log("银行卡账户：", myselect.options[index].text);
         },
         //获取转账方式
         selectMethod(event) {
