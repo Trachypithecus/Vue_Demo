@@ -53,12 +53,14 @@ export default {
     }
   },
   methods: {
+    //点击提交按钮事件
     onSubmit() {
       if (!this.nickname) {
         alert("请输入您的昵称");
       } else if (!this.password) {
         alert("请输入你的密码");
       } else {
+        //路由跳转，字符串路径
         this.$router.push({ name: "productList" });
         localStorage.setItem("token", "qqqqq");
       }

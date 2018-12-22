@@ -98,6 +98,7 @@ export default {
         alert("请阅读接受协议");
       } else {
         //this.$router.push({path: '/passport/sign_in'});
+        this.$router.push({ name: "sign_in" });
       }
     }
   }
